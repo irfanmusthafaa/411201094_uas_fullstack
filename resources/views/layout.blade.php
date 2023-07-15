@@ -97,7 +97,7 @@ asset('plugins/daterangepicker/daterangepicker.css') }}">
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ url('barang') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fas fa-poll-h nav-icon"></i>
                                         <p>Barang</p>
                                     </a>
                                 </li>
@@ -105,7 +105,7 @@ asset('plugins/daterangepicker/daterangepicker.css') }}">
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ url('lokasi') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="ffas fa-poll-h nav-icon"></i>
                                         <p>Lokasi</p>
                                     </a>
                                 </li>
@@ -113,7 +113,7 @@ asset('plugins/daterangepicker/daterangepicker.css') }}">
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ url('kurir') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="ffas fa-poll-h nav-icon"></i>
                                         <p>Kurir</p>
                                     </a>
                                 </li>
@@ -121,7 +121,7 @@ asset('plugins/daterangepicker/daterangepicker.css') }}">
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{ url('pengiriman') }}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="ffas fa-poll-h nav-icon"></i>
                                     <p>Pengiriman</p>
                                 </a>
                             </li>
