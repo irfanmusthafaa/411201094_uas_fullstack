@@ -55,25 +55,33 @@ class PengirimanController extends Controller
      */
     public function store(Request $request)
     {
-        
+        try {
             $messages = [
-                'no_pengiriman.required' => 'Silakan isi no pengiriman',
+                'no_pengiriman.required' => 'Mohon isi no pengiriman terlebih dahulu',
                 'no_pengiriman.unique' => 'Kode no pengiriman terdaftar',
-                'tanggal.required' => 'Silakan isi tanggal',
-                'tanggal.date' => 'Silakan isi tanggal dengan format yang sesuai',
-                'lokasi_id.required' => 'Silakan isi lokasi id',
-                'lokasi_id.numeric' => 'Silakan isi lokasi id dengan angka',
-                'barang_id.required' => 'Silakan isi barang id',
-                'barang_id.numeric' => 'Silakan isi barang id dengan angka',
-                'kurir_id.required' => 'Silakan isi kurir id',
-                'kurir_id.numeric' => 'Silakan isi kurir id dengan angka',
+                'tanggal.required' => 'Mohon isi tanggal terlebih dahulu',
+                'tanggal.date' => 'Mohon isi tanggal dengan format yang sesuai',
+                'lokasi_id.required' => 'Mohon isi lokasi id terlebih dahulu',
+                'lokasi_id.numeric' => 'Mohon isi lokasi id dengan angka',
+                'barang_id.required' => 'Mohon isi barang id terlebih dahulu',
+                'barang_id.numeric' => 'Mohon isi barang id dengan angka',
+                'kurir_id.required' => 'Mohon isi kurir id terlebih dahulu',
+                'kurir_id.numeric' => 'Mohon isi kurir id dengan angka',
+                'jumlah_barang.required' => 'Mohon isi jumlah barang terlebih dahulu',
+                'jumlah_barang.numeric' => 'Mohon isi jumlah barang dengan angka',
+                'jumlah_barang.min' => 'Mohon isi jumlah barang minimal 1',
+                'harga_barang.required' => 'Mohon isi harga barang terlebih dahulu',
+                'harga_barang.numeric' => 'Mohon isi harga barang dengan angka'
             ];
+            dump($request->input('kurir_id'));
             $validator = Validator::make($request->all(), [
                 'no_pengiriman'=> 'required|unique:pengiriman',
                 'tanggal'=> 'required|date',
                 'lokasi_id'=> 'required|numeric',
                 'barang_id'=> 'required|numeric',
                 'kurir_id'=> 'required|numeric',
+                'jumlah_barang'=> 'required|numeric|min:1',
+                'harga_barang'=>'required|numeric'
             ], $messages);
             if ($validator->fails()) {
                 $messages = $validator->messages();
@@ -116,10 +124,15 @@ class PengirimanController extends Controller
             $pengiriman->jumlah_barang = $request->input('jumlah_barang');
             $pengiriman->harga_barang = $request->input('harga_barang');
             $pengiriman->is_approved = 0;
+            $pengiriman->lokasi_name = $request->input('lokasi_name');
+            $pengiriman->barang_name = $request->input('barang_name');
+            $pengiriman->kurir_name = $request->input('kurir_name');
             $pengiriman->save();
     
             return \redirect('pengiriman')->with('success', 'Tambah data berhasil');
-        
+        } catch (\Throwable $th) {
+            return Redirect::back()->withErrors(['error_msg'=>$th]);
+        }
     }
 
     /**
@@ -130,9 +143,9 @@ class PengirimanController extends Controller
      */
     public function show($id)
     {
-        $detail = Pengiriman::find($id);
+        $detail = DB::table('pengiriman')->where('id', $id)->first();
 
-        return view('pengiriman.detail', compact('detail'));
+        return response()->json(['data' => $detail], 200);
     }
 
     /**
@@ -172,18 +185,18 @@ class PengirimanController extends Controller
     {
         try {
             $messages = [
-                'no_pengiriman.required' => 'Silakan isi no pengiriman',
-                'tanggal.required' => 'Silakan isi tanggal',
-                'lokasi_id.required' => 'Silakan isi lokasi id',
-                'lokasi_id.numeric' => 'Silakan isi lokasi id dengan angka',
-                'barang_id.required' => 'Silakan isi barang id',
-                'barang_id.numeric' => 'Silakan isi barang id dengan angka',
-                'kurir_id.required' => 'Silakan isi kurir id',
-                'kurir_id.numeric' => 'Silakan isi kurir id dengan angka',
-                'jumlah_barang.required' => 'Silakan isi jumlah barang',
-                'jumlah_barang.numeric' => 'Silakan isi jumlah barang dengan angka',
-                'harga_barang.required' => 'Silakan isi harga barang',
-                'harga_barang.numeric' => 'Silakan isi harga barang dengan angka'
+                'no_pengiriman.required' => 'Mohon isi no pengiriman terlebih dahulu',
+                'tanggal.required' => 'Mohon isi tanggal terlebih dahulu',
+                'lokasi_id.required' => 'Mohon isi lokasi id terlebih dahulu',
+                'lokasi_id.numeric' => 'Mohon isi lokasi id dengan angka',
+                'barang_id.required' => 'Mohon isi barang id terlebih dahulu',
+                'barang_id.numeric' => 'Mohon isi barang id dengan angka',
+                'kurir_id.required' => 'Mohon isi kurir id terlebih dahulu',
+                'kurir_id.numeric' => 'Mohon isi kurir id dengan angka',
+                'jumlah_barang.required' => 'Mohon isi jumlah barang terlebih dahulu',
+                'jumlah_barang.numeric' => 'Mohon isi jumlah barang dengan angka',
+                'harga_barang.required' => 'Mohon isi harga barang terlebih dahulu',
+                'harga_barang.numeric' => 'Mohon isi harga barang dengan angka'
             ];
             $validator = Validator::make($request->all(), [
                 'no_pengiriman'=> 'required',
@@ -235,6 +248,9 @@ class PengirimanController extends Controller
             $pengiriman->jumlah_barang = $request->input('jumlah_barang');
             $pengiriman->harga_barang = $request->input('harga_barang');
             $pengiriman->is_approved = 0;
+            $pengiriman->lokasi_name = $request->input('lokasi_name');
+            $pengiriman->barang_name = $request->input('barang_name');
+            $pengiriman->kurir_name = $request->input('kurir_name');
             
             $pengiriman->save();
     

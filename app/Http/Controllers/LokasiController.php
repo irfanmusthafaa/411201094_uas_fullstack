@@ -41,24 +41,36 @@ class LokasiController extends Controller
      */
     public function store(Request $request)
     {
-        $messages = [
-            'kode_lokasi.required' => 'Mohon isi id barang terlebih dahulu'
+        try {
+            $messages = [
+                'nama_lokasi.required' => 'Mohon isi nama lokasi terlebih dahulu'
             ];
-            $validator = Validator::make($request->all(),[
-                'kode_lokasi' => 'required|alpha_num',
-            ], $messages);
-            if($validator->fails()){
-            $messages = $validator->messages();
-            return Redirect::back()->withErrors($messages)->withInput($request->all());
+
+            if (!$request->filled('kode_lokasi')) {
+                $latestId = Lokasi::max('id');
+                if(strlen($latestId+1)==3) { $prefix = '0'; }
+                elseif(strlen($latestId+1)==2) { $prefix = '00'; }
+                else $prefix = '000';
+                $new_code = 'LOK-'.$prefix.($latestId+1);
+                $kode_lokasi = $new_code;
             }
 
+            $validator = Validator::make($request->all(), [
+                'nama_lokasi' => 'required'
+            ], $messages);
+            if ($validator->fails()) {
+                $messages = $validator->messages();
+                return Redirect::back()->withErrors($messages)->withInput($request->all());
+            }
             $lokasi = new Lokasi();
             $lokasi->kode_lokasi = $kode_lokasi ?? $request->input('kode_lokasi');
             $lokasi->nama_lokasi  = $request->input('nama_lokasi');
             $lokasi->save();
     
             return \redirect('lokasi')->with('success', 'Tambah data berhasil');
-        
+        } catch (\Throwable $th) {
+            return Redirect::back()->withErrors(['error_msg'=>$th]);
+        }
     }
 
     /**

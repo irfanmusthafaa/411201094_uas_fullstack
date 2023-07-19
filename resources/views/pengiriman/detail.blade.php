@@ -16,34 +16,40 @@
                         <div class="list-group">
                             <div class="list-group-item list-group-item-action flex-column align-items-start">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">No Pengiriman</h5>
+                                    <h5 class="mb-1">Kurir</h5>
                                 </div>
-                                <p class="mb-1">{{ isset($detail['no_pengiriman']) ? $detail['no_pengiriman'] : 'No Pengiriman tidak ada' }}</p>
+                                <p class="mb-1">{{ isset($detail['kurir_name']) ? $detail['kurir_name'] : 'Nama kurir tidak ada' }}</p>
                             </div>
                             
                             <div class="list-group-item list-group-item-action flex-column align-items-start">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Tanggal</h5>
+                                    <h5 class="mb-1">Barang</h5>
                                 </div>
-                                <p class="mb-1">{{ isset($detail['tanggal']) ? $detail['tanggal'] : 'Tangga tidak ada' }}</p>
+                                <p class="mb-1">{{ isset($detail['barang_name']) ? $detail['barang_name'] : 'Nama kurir tidak ada' }}</p>
                             </div>
                             <div class="list-group-item list-group-item-action flex-column align-items-start">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Lokasi ID</h5>
+                                    <h5 class="mb-1">Lokasi</h5>
                                 </div>
-                                <p class="mb-1">{{ isset($detail['lokasi_id']) ? $detail['lokasi_id'] : 'Lokasi tidak ada' }}</p>
+                                <p class="mb-1">{{ isset($detail['lokasi_name']) ? $detail['lokasi_name'] : 'Nama lokasi tidak ada' }}</p>
                             </div>
                             <div class="list-group-item list-group-item-action flex-column align-items-start">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Barang ID</h5>
+                                    <h5 class="mb-1">Jumlah Stok</h5>
                                 </div>
-                                <p class="mb-1">{{ isset($detail['barang_id']) ? $detail['barang_id'] : 'barang tidak ada' }}</p>
+                                <p class="mb-1">{{ isset($detail['jumlah_stok']) ? $detail['jumlah_stok'] : 'Jumlah stok tidak ada' }}</p>
                             </div>
                             <div class="list-group-item list-group-item-action flex-column align-items-start">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Jumlah Barang</h5>
+                                    <h5 class="mb-1">Jumlah Display</h5>
                                 </div>
-                                <p class="mb-1">{{ isset($detail['jumlah_barang']) ? $detail['jumlah_barang'] : 'Jumlah barang tidak ada' }}</p>
+                                <p class="mb-1">{{ isset($detail['jumlah_display']) ? $detail['jumlah_display'] : 'Jumlah display tidak ada' }}</p>
+                            </div>
+                            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">Visit Date</h5>
+                                </div>
+                                <p class="mb-1">{{ isset($detail['visit_datetime']) ? $detail['visit_datetime'] : 'Tanggal visit tidak ada' }}</p>
                             </div>
                         </div>
 

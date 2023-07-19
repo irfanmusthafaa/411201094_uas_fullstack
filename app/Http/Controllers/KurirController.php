@@ -63,7 +63,7 @@ class KurirController extends Controller
             $kurir = new Kurir();
             $kurir->name = $request->input('name');
             $kurir->email = $request->input('email');
-            $kurir->password = 'test';
+            $kurir->password = Hash::make($request->input('password'));
             $kurir->save();
     
             User::create([
@@ -129,11 +129,12 @@ class KurirController extends Controller
                 $messages = $validator->messages();
                 return Redirect::back()->withErrors($messages)->withInput($request->all());
             }
+            $pass = Hash::make($request->input('password'));
             $kurir = Kurir::find($id);
             $prev_email = $kurir->email;
             $kurir->name = $request->input('name');
             $kurir->email = $request->input('email');
-            $kurir->password = Hash::make($request->input('password'));
+            $kurir->password = $pass;
             $user = User::where('email',$prev_email)->first();
 
             if ($prev_email != $kurir->email){
@@ -147,9 +148,10 @@ class KurirController extends Controller
 
             $kurir->save();
     
-            $user->name = $sales->name;
-            $user->email = $sales->email;
-            $user->password = $sales->password;
+            $user->name = $kurir->name;
+            $user->email = $kurir->email;
+            $user->password = $pass;
+            $user->level = 2;
             $user->save();
     
             return \redirect('kurir')->with('success', 'Ubah data berhasil');

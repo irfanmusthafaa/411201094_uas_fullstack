@@ -81,7 +81,11 @@ asset('plugins/daterangepicker/daterangepicker.css') }}">
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="info">
                     <a href="#" class="d-block">
-                        Admin
+                        @if(auth()->user()->level == 1)
+                            Admin
+                        @else
+                            Kurir
+                        @endif
                     </a>
                 </div>
             </div>
@@ -94,10 +98,19 @@ asset('plugins/daterangepicker/daterangepicker.css') }}">
                     <!-- Add icons to the links using the .nav-icon class
                     with font-awesome or any other icon font library -->
                     <li class="nav-item menu-open">
+                        @if(auth()->user()->level == 1)
+                        <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ url('dashboard') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Dashboard</p>
+                                    </a>
+                                </li>
+                            </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ url('barang') }}" class="nav-link">
-                                        <i class="fas fa-poll-h nav-icon"></i>
+                                        <i class="far fa-circle nav-icon"></i>
                                         <p>Barang</p>
                                     </a>
                                 </li>
@@ -105,7 +118,7 @@ asset('plugins/daterangepicker/daterangepicker.css') }}">
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ url('lokasi') }}" class="nav-link">
-                                        <i class="ffas fa-poll-h nav-icon"></i>
+                                        <i class="far fa-circle nav-icon"></i>
                                         <p>Lokasi</p>
                                     </a>
                                 </li>
@@ -113,15 +126,16 @@ asset('plugins/daterangepicker/daterangepicker.css') }}">
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ url('kurir') }}" class="nav-link">
-                                        <i class="ffas fa-poll-h nav-icon"></i>
+                                        <i class="far fa-circle nav-icon"></i>
                                         <p>Kurir</p>
                                     </a>
                                 </li>
                             </ul>
+                        @endif
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{ url('pengiriman') }}" class="nav-link">
-                                    <i class="ffas fa-poll-h nav-icon"></i>
+                                    <i class="far fa-circle nav-icon"></i>
                                     <p>Pengiriman</p>
                                 </a>
                             </li>
@@ -171,7 +185,7 @@ asset('plugins/daterangepicker/daterangepicker.css') }}">
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <strong>Copyright &copy; 2023</strong>
-        UAS - Irfan Mustafa
+        Irfan Mustafa - UAS
         <div class="float-right d-none d-sm-inline-block">
             <b>Version</b> 1.0
         </div>

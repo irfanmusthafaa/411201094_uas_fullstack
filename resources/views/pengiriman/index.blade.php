@@ -34,9 +34,9 @@
                             @foreach($list as $value)
                                 <tr>
                                     <th scope="row">{{ $i++ }}</th>
-                                    <td>{{ $value->kurir_id }}</td>
-                                    <td>{{ $value->barang_id }}</td>
-                                    <td>{{ $value->lokasi_id }}</td>
+                                    <td>{{ $value->kurir_name }}</td>
+                                    <td>{{ $value->barang_name }}</td>
+                                    <td>{{ $value->lokasi_name }}</td>
                                     <td>{{ $value->jumlah_barang }}</td>
                                     <td>Rp. @convert($value->harga_barang)</td>
                                     <td>{{ date('d-m-Y', strtotime($value->tanggal ))}}</td>

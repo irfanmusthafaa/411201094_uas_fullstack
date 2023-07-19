@@ -23,7 +23,8 @@
                                 @error('no_pengiriman')
                                 <div class="error">{{ $message }}</div>
                                 @enderror
-                                <input type="text" class="form-control" id="no_pengiriman" name="no_pengiriman" required value={{$detail['no_pengiriman']}}>
+                                <input type="text" class="form-control" id="no_pengiriman" name="no_pengiriman"
+                                       placeholder="Masukkan no pengiriman" required value={{$detail['no_pengiriman']}}>
 
                                 <label for="name" class="required">Kurir</label>
                                 @error('kurir_id')
@@ -32,9 +33,11 @@
                                 @error('kurir_name')
                                 <div class="error">{{ $message }}</div>
                                 @enderror
-                                {{ Form::select('kurir_id',$kurir, $detail['kurir_id'],['class' => 'form-control','placeholder'=> '-- Silakan Masukkan --', 'id' => 'kurir_select', 'disabled' => $defaultKurirID ? 'disabled' : null]) }}
-                                <input type="hidden" name="kurir_name" id="kurir_name" value="{{ $detail['kurir_name'] }}">
-
+                                
+                                {{ Form::select('kurir_id',$kurir, $defaultKurirID,['class' => 'form-control','placeholder'=> '-- Pilih --', 'id' => 'kurir_select', 'disabled' => $defaultKurirID ? 'disabled' : null, 'value'=>isset($defaultKurirID) ? $kurir[$defaultKurirID] : '' ]) }}
+                                <input type="hidden" name="kurir_name" id="kurir_name" value="{{ isset($defaultKurirID) ? $kurir[$defaultKurirID] : '' }}">
+                                <input type="hidden" name="kurir_id" value="{{ isset($defaultKurirID) ? $defaultKurirID : '' }}">
+                                
                                 <label for="name" class="required">Barang</label>
                                 @error('barang_id')
                                 <div class="error">{{ $message }}</div>
@@ -42,7 +45,7 @@
                                 @error('barang_name')
                                 <div class="error">{{ $message }}</div>
                                 @enderror
-                                {{ Form::select('barang_id',$barang, $detail['barang_id'],['class' => 'form-control','placeholder'=> '-- Silakan Masukkan --', 'id' => 'barang_select']) }}
+                                {{ Form::select('barang_id',$barang, $detail['barang_id'],['class' => 'form-control','placeholder'=> '-- Pilih --', 'id' => 'barang_select']) }}
                                 <input type="hidden" name="barang_name" id="barang_name" value={{$detail['barang_name']}}>
 
                                 <label for="name" class="required">Lokasi</label>
@@ -52,7 +55,7 @@
                                 @error('lokasi_name')
                                 <div class="error">{{ $message }}</div>
                                 @enderror
-                                {{ Form::select('lokasi_id',$lokasi, $detail['lokasi_id'],['class' => 'form-control','placeholder'=> '-- Silakan Masukkan --', 'id' => 'lokasi_select']) }}
+                                {{ Form::select('lokasi_id',$lokasi, $detail['lokasi_id'],['class' => 'form-control','placeholder'=> '-- Pilih --', 'id' => 'lokasi_select']) }}
                                 <input type="hidden" name="lokasi_name" id="lokasi_name" value={{$detail['lokasi_name']}}>
 
                                 <label for="stok" class="required">Jumlah Barang</label>
@@ -78,14 +81,14 @@
                                 @endif
                                 <div class="error">{{ $message }}</div>
                                 @enderror
-                                <input type="datetime-local" class="form-control" placeholder="Silakan Masukkan Tanggal" name="tanggal"  value={{$detail['tanggal']}}>
+                                <input type="datetime-local" class="form-control" placeholder="Pilih Tanggal" name="tanggal"  value={{$detail['tanggal']}}>
 
                                 </div>
                             
                             @error('error_msg')
                                 <div class="error">{{ $errors->first('error_msg') }}</div>
                                 @enderror
-                            <button type="submit" class="form-control btn btn-success">Submit</button>
+                            <button type="submit" class="form-control btn btn-primary">Submit</button>
                         </form>
                     </div>
                     <!-- /.card-body -->
