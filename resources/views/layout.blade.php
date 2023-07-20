@@ -61,7 +61,7 @@ asset('plugins/daterangepicker/daterangepicker.css') }}">
             </li>
             <li>
                 <a class="nav-link" href="#" role="button">
-                <button class="btn btn-primary btn-sm" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none"> @csrf </form>Logout</button>
+                <button class="btn btn-danger btn-sm" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none"> @csrf </form>Logout</button>
 
                 </a>
             </li>
